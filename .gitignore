@@ -1,0 +1,9 @@
+__pycache__/
+.git/
+.idea/
+app/__pycache__/
+app/models/__pycache__/
+__pycache__/ app/__pycache__/ app/models/__pycache__/ app/utls/__pycache__/
+.DS_Store .gitignore .idea .pytest_cache
+.DS_Store/
+.DS_Store
