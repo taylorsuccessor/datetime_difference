@@ -62,18 +62,20 @@ def test_validate_response_type_unit():
             {
                 "loc": [
                     "body",
-                    "from_datetime"
+                    "response_type"
                 ],
-                "msg": "invalid datetime format",
-                "type": "value_error.datetime"
-            },
-            {
-                "loc": [
-                    "body",
-                    "to_datetime"
-                ],
-                "msg": "invalid datetime format",
-                "type": "value_error.datetime"
+                "msg": "value is not a valid enumeration member; permitted: 'seconds', 'minutes', 'hours', 'days', 'weeks', 'years'",
+                "type": "type_error.enum",
+                "ctx": {
+                    "enum_values": [
+                        "seconds",
+                        "minutes",
+                        "hours",
+                        "days",
+                        "weeks",
+                        "years"
+                    ]
+                }
             }
         ]
     }
