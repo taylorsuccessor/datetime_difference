@@ -1,6 +1,10 @@
 import numpy as np
 from typing import Callable
-from app.models import ResponseType, DifferenceDatetimeResponse, DifferenceDatetimeRequest
+from app.models import (
+    ResponseType,
+    DifferenceDatetimeResponse,
+    DifferenceDatetimeRequest,
+)
 
 
 class DifferenceDatetime:
@@ -16,7 +20,9 @@ class DifferenceDatetime:
 
     def __init__(self, input_data: DifferenceDatetimeRequest):
         self.input_data = input_data
-        self.seconds_different = (input_data.to_datetime - input_data.from_datetime).total_seconds()
+        self.seconds_different = (
+            input_data.to_datetime - input_data.from_datetime
+        ).total_seconds()
 
     def get_days_different(self) -> float:
         """
@@ -36,8 +42,8 @@ class DifferenceDatetime:
         then we convert it to second after that we give the required output
         the default is days
         """
-        from_date = self.input_data.from_datetime.strftime('%Y-%m-%d')
-        to_date = self.input_data.to_datetime.strftime('%Y-%m-%d')
+        from_date = self.input_data.from_datetime.strftime("%Y-%m-%d")
+        to_date = self.input_data.to_datetime.strftime("%Y-%m-%d")
         weekdays_seconds = np.busday_count(from_date, to_date) * (60 * 60 * 24)
         return self._format_output(weekdays_seconds, ResponseType.DAYS)
 
@@ -59,7 +65,11 @@ class DifferenceDatetime:
         it will take it otherwise it will take convert_to that
         passed to the function
         """
-        convert_to = self.input_data.response_type if self.input_data.response_type else convert_to
+        convert_to = (
+            self.input_data.response_type
+            if self.input_data.response_type
+            else convert_to
+        )
         return round(self.seconds_converter_formila[convert_to](value), 3)
 
     def response(self) -> DifferenceDatetimeResponse:
@@ -67,7 +77,7 @@ class DifferenceDatetime:
         build the response model to be return to the client
         """
         return DifferenceDatetimeResponse(
-            days_number = self.get_days_different(),
-            weekdays_number = self.get_weekdays_different(),
-            weeks_number = self.get_weeks_different(),
+            days_number=self.get_days_different(),
+            weekdays_number=self.get_weekdays_different(),
+            weeks_number=self.get_weeks_different(),
         )
